@@ -1,20 +1,30 @@
 import React from 'react';
 import './styles/App.css';
-import {useGetPostsQuery} from "./services/PostService";
-import {useAppSelector} from "./hooks/useAppSelector";
+import {Layout} from "antd";
+import {Route, Routes} from "react-router-dom";
+import PostListPage from "./pages/PostListPage";
+import PostDetailPage from "./pages/PostDetailPage";
 
 function App() {
 
-  const {data, error, isLoading} = useGetPostsQuery(null)
 
-  const post = useAppSelector(state => state.postApi)
-
-  console.log(post)
 
   return (
-    <div className="App">
+      <Layout>
+          <Layout.Header>
 
-    </div>
+          </Layout.Header>
+          <Layout.Content>
+              <div className="App">
+                <Routes>
+                    <Route element={<PostListPage/>} path={"/posts"}/>
+                    <Route element={<PostDetailPage/>} path={"/posts/:id"}/>
+                </Routes>
+              </div>
+          </Layout.Content>
+          <Layout.Footer/>
+      </Layout>
+
   );
 }
 
